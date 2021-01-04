@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : sqlitebrowser
 Version  : 3.12.1
-Release  : 2
+Release  : 4
 URL      : file:///insilications/build/clearlinux/packages/sqlitebrowser/sqlitebrowser-v3.12.1.tar.gz
 Source0  : file:///insilications/build/clearlinux/packages/sqlitebrowser/sqlitebrowser-v3.12.1.tar.gz
 Summary  : No detailed summary available
@@ -74,6 +74,7 @@ BuildRequires : zlib-staticdev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
+Patch1: 0001-Static-compile-libqhexedit-libqcustomplot-libqscinti.patch
 
 %description
 TS files for the application should be all named according to a convention such as <short_appname>_<locale>, e.g. sqlb_de, sqlb_ru etc.
@@ -95,9 +96,19 @@ Group: Data
 data components for the sqlitebrowser package.
 
 
+%package staticdev
+Summary: staticdev components for the sqlitebrowser package.
+Group: Default
+Requires: sqlitebrowser-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the sqlitebrowser package.
+
+
 %prep
 %setup -q -n sqlitebrowser
 cd %{_builddir}/sqlitebrowser
+%patch1 -p1
 
 %build
 unset http_proxy
@@ -105,7 +116,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1609788260
+export SOURCE_DATE_EPOCH=1609790754
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,7 +158,7 @@ ccache -s
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1609788260
+export SOURCE_DATE_EPOCH=1609790754
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
@@ -166,3 +177,9 @@ popd
 /usr/share/icons/hicolor/256x256/apps/sqlitebrowser.png
 /usr/share/icons/hicolor/scalable/apps/sqlitebrowser.svg
 /usr/share/metainfo/sqlitebrowser.desktop.appdata.xml
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libqcustomplot.a
+/usr/lib64/libqhexedit.a
+/usr/lib64/libqscintilla2.a

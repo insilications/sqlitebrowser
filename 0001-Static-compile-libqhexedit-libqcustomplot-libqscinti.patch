@@ -1,0 +1,72 @@
+From a79b6cba3d5aa13b265689708c0d7d08286200bf Mon Sep 17 00:00:00 2001
+From: insilications <boboniboni@gmail.com>
+Date: Mon, 4 Jan 2021 16:42:59 -0300
+Subject: [PATCH] Static compile libqhexedit libqcustomplot libqscintilla2
+
+---
+ CMakeLists.txt                         | 9 +++++++++
+ libs/qcustomplot-source/CMakeLists.txt | 2 +-
+ libs/qhexedit/CMakeLists.txt           | 2 +-
+ libs/qscintilla/Qt4Qt5/CMakeLists.txt  | 2 +-
+ 4 files changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a4ea0251..6d0f8902 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -497,6 +497,15 @@ if(NOT WIN32)
+ 	install(TARGETS ${PROJECT_NAME}
+ 		RUNTIME DESTINATION bin
+ 		LIBRARY DESTINATION lib)
++	install(TARGETS qhexedit
++		RUNTIME DESTINATION bin
++		LIBRARY DESTINATION lib)
++	install(TARGETS qcustomplot
++		RUNTIME DESTINATION bin
++		LIBRARY DESTINATION lib)
++	install(TARGETS qscintilla2
++		RUNTIME DESTINATION bin
++		LIBRARY DESTINATION lib)
+ endif()
+ 
+ if(ENABLE_TESTING)
+diff --git a/libs/qcustomplot-source/CMakeLists.txt b/libs/qcustomplot-source/CMakeLists.txt
+index da04a4f0..bef537f8 100644
+--- a/libs/qcustomplot-source/CMakeLists.txt
++++ b/libs/qcustomplot-source/CMakeLists.txt
+@@ -16,6 +16,6 @@ set(QCUSTOMPLOT_MOC_HDR
+ 	qcustomplot.h
+ )
+ 
+-add_library(qcustomplot ${QCUSTOMPLOT_SRC} ${QCUSTOMPLOT_HDR} ${QCUSTOMPLOT_MOC})
++add_library(qcustomplot STATIC ${QCUSTOMPLOT_SRC} ${QCUSTOMPLOT_HDR} ${QCUSTOMPLOT_MOC})
+ 
+ target_link_libraries(qcustomplot Qt5::Widgets Qt5::PrintSupport)
+diff --git a/libs/qhexedit/CMakeLists.txt b/libs/qhexedit/CMakeLists.txt
+index 3779fb24..6bbd98eb 100644
+--- a/libs/qhexedit/CMakeLists.txt
++++ b/libs/qhexedit/CMakeLists.txt
+@@ -21,6 +21,6 @@ set(QHEXEDIT_MOC_HDR
+ 	src/commands.h
+ )
+ 
+-add_library(qhexedit ${QHEXEDIT_SRC} ${QHEXEDIT_HDR} ${QHEXEDIT_MOC})
++add_library(qhexedit STATIC ${QHEXEDIT_SRC} ${QHEXEDIT_HDR} ${QHEXEDIT_MOC})
+ 
+ target_link_libraries(qhexedit Qt5::Widgets)
+diff --git a/libs/qscintilla/Qt4Qt5/CMakeLists.txt b/libs/qscintilla/Qt4Qt5/CMakeLists.txt
+index 6b1e6141..7e5a6639 100644
+--- a/libs/qscintilla/Qt4Qt5/CMakeLists.txt
++++ b/libs/qscintilla/Qt4Qt5/CMakeLists.txt
+@@ -172,7 +172,7 @@ QT5_WRAP_CPP(QSCINTILLA_WRAP_MOC_HDR ${QSCINTILLA_MOC_HDR})
+ 
+ include_directories(. ../include ../lexlib ../src)
+ 
+-add_library(qscintilla2 ${QSCINTILLA_SRC} ${QSCINTILLA_HDR} ${QSCINTILLA_MOC_HDR} ${QSCINTILLA_MOC} ${QSCINTILLA_WRAP_MOC_HDR})
++add_library(qscintilla2 STATIC ${QSCINTILLA_SRC} ${QSCINTILLA_HDR} ${QSCINTILLA_MOC_HDR} ${QSCINTILLA_MOC} ${QSCINTILLA_WRAP_MOC_HDR})
+ 
+ target_link_libraries(qscintilla2 Qt5::Widgets Qt5::PrintSupport)
+ 
+-- 
+2.28.0
+
