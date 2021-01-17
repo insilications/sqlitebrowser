@@ -1,19 +1,28 @@
-From a79b6cba3d5aa13b265689708c0d7d08286200bf Mon Sep 17 00:00:00 2001
+From c2545258e3fc38d6fd970014ec520d045f55fde5 Mon Sep 17 00:00:00 2001
 From: insilications <boboniboni@gmail.com>
 Date: Mon, 4 Jan 2021 16:42:59 -0300
 Subject: [PATCH] Static compile libqhexedit libqcustomplot libqscintilla2
 
 ---
- CMakeLists.txt                         | 9 +++++++++
- libs/qcustomplot-source/CMakeLists.txt | 2 +-
- libs/qhexedit/CMakeLists.txt           | 2 +-
- libs/qscintilla/Qt4Qt5/CMakeLists.txt  | 2 +-
- 4 files changed, 12 insertions(+), 3 deletions(-)
+ CMakeLists.txt                         | 11 ++++++++++-
+ libs/qcustomplot-source/CMakeLists.txt |  2 +-
+ libs/qhexedit/CMakeLists.txt           |  2 +-
+ libs/qscintilla/Qt4Qt5/CMakeLists.txt  |  2 +-
+ 4 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a4ea0251..6d0f8902 100644
+index 4061a35d..3a88ae65 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
+@@ -15,7 +15,7 @@ endif()
+ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
+ 
+ OPTION(ENABLE_TESTING "Enable the unit tests" OFF)
+-OPTION(FORCE_INTERNAL_QSCINTILLA "Don't use the distribution's QScintilla library even if there is one" OFF)
++OPTION(FORCE_INTERNAL_QSCINTILLA "Don't use the distribution's QScintilla library even if there is one" ON)
+ OPTION(FORCE_INTERNAL_QCUSTOMPLOT "Don't use distribution's QCustomPlot even if available" ON)
+ OPTION(FORCE_INTERNAL_QHEXEDIT "Don't use distribution's QHexEdit even if available" ON)
+ OPTION(ALL_WARNINGS "Enable some useful warning flags" OFF)
 @@ -497,6 +497,15 @@ if(NOT WIN32)
  	install(TARGETS ${PROJECT_NAME}
  		RUNTIME DESTINATION bin

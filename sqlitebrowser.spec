@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : sqlitebrowser
 Version  : 3.12.1
-Release  : 4
+Release  : 6
 URL      : file:///insilications/build/clearlinux/packages/sqlitebrowser/sqlitebrowser-v3.12.1.tar.gz
 Source0  : file:///insilications/build/clearlinux/packages/sqlitebrowser/sqlitebrowser-v3.12.1.tar.gz
 Summary  : No detailed summary available
@@ -99,7 +99,6 @@ data components for the sqlitebrowser package.
 %package staticdev
 Summary: staticdev components for the sqlitebrowser package.
 Group: Default
-Requires: sqlitebrowser-dev = %{version}-%{release}
 
 %description staticdev
 staticdev components for the sqlitebrowser package.
@@ -116,7 +115,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1609790754
+export SOURCE_DATE_EPOCH=1610880682
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -131,17 +130,17 @@ export CFFLAGS="-O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--
 #
 export LDFLAGS="-O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -fno-plt -ffat-lto-objects -fPIC -pthread -lpthread -static-libstdc++ -static-libgcc /usr/lib64/libsqlcipher.a /usr/lib64/libcrypto.a /usr/lib64/libssl.a /usr/lib64/libz.a /usr/lib64/liblzma.a -pthread -ldl -lm -lmvec"
 #
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export NM=gcc-nm
+export AR=/usr/bin/gcc-ar
+export RANLIB=/usr/bin/gcc-ranlib
+export NM=/usr/bin/gcc-nm
 #
 %global _lto_cflags %{nil}
 unset CCACHE_DISABLE
 export PATH="/usr/lib64/ccache/bin:$PATH"
 export CCACHE_NOHASHDIR=true
 export CCACHE_CPP2=true
-export CCACHE_SLOPPINESS=pch_defines,time_macros,locale,file_stat_matches,file_stat_matches_ctime,include_file_ctime,include_file_mtime,modules,system_headers,clang_index_store,file_macro
-#export CCACHE_SLOPPINESS=modules,include_file_mtime,include_file_ctime,time_macros,pch_defines,file_stat_matches,clang_index_store,system_headers,locale
+#export CCACHE_SLOPPINESS=pch_defines,time_macros,locale,file_stat_matches,file_stat_matches_ctime,include_file_ctime,include_file_mtime,modules,system_headers,clang_index_store,file_macro
+export CCACHE_SLOPPINESS=modules,include_file_mtime,include_file_ctime,time_macros,pch_defines,file_stat_matches,clang_index_store,system_headers,locale
 export CCACHE_DIR=/var/tmp/ccache
 export CCACHE_BASEDIR=/builddir/build/BUILD
 #export CCACHE_LOGFILE=/var/tmp/ccache/cache.debug
@@ -150,7 +149,10 @@ export CCACHE_BASEDIR=/builddir/build/BUILD
 ## altflags1 end
 %cmake .. -DCMAKE_BUILD_TYPE=Release \
 -Dsqlcipher=1 \
--Wno-dev
+-Wno-dev \
+-DFORCE_INTERNAL_QSCINTILLA=ON \
+-DFORCE_INTERNAL_QCUSTOMPLOT=ON \
+-DFORCE_INTERNAL_QHEXEDIT=ON
 make  %{?_smp_mflags}  V=1 VERBOSE=1
 ## ccache stats
 ccache -s
@@ -158,7 +160,7 @@ ccache -s
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1609790754
+export SOURCE_DATE_EPOCH=1610880682
 rm -rf %{buildroot}
 pushd clr-build
 %make_install
