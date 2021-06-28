@@ -11,6 +11,7 @@
 #Qt5WebEngine
 #Qt5WebEngineCore
 #Qt5WebEngineWidgets
+#sqlcipher
 Qt5Concurrent
 Qt5Core
 Qt5DBus
@@ -32,5 +33,4 @@ Qt5Test
 Qt5Widgets
 Qt5X11Extras
 Qt5Xml
-sqlcipher
 zlib

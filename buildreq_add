@@ -1,7 +1,5 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-#sqlite-autoconf-dev
-#sqlite-autoconf-staticdev
 #qtdeclarative
 #qtdeclarative-dev
 #qtlocation
@@ -10,6 +8,8 @@
 #qtwebchannel-dev
 #qtwebengine
 #qtwebengine-dev
+#sqlcipher-dev
+#sqlcipher-staticdev
 binutils-dev
 buildreq-cmake
 bzip2-dev
@@ -34,8 +34,9 @@ qtsvg
 qtsvg-dev
 qttools-dev
 readline-dev
-sqlcipher-dev
-sqlcipher-staticdev
+sqlite-autoconf-dev
+sqlite-autoconf-lib
+sqlite-autoconf-staticdev
 tcl
 tcl-dev
 tcl-staticdev

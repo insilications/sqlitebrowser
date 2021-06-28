@@ -1,4 +1,4 @@
-From c2545258e3fc38d6fd970014ec520d045f55fde5 Mon Sep 17 00:00:00 2001
+From f2a6345b07297ca18cfb2a092fb58283ab459765 Mon Sep 17 00:00:00 2001
 From: insilications <boboniboni@gmail.com>
 Date: Mon, 4 Jan 2021 16:42:59 -0300
 Subject: [PATCH] Static compile libqhexedit libqcustomplot libqscintilla2
@@ -11,7 +11,7 @@ Subject: [PATCH] Static compile libqhexedit libqcustomplot libqscintilla2
  4 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4061a35d..3a88ae65 100644
+index e58c599c..09afdb72 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -15,7 +15,7 @@ endif()
@@ -23,7 +23,7 @@ index 4061a35d..3a88ae65 100644
  OPTION(FORCE_INTERNAL_QCUSTOMPLOT "Don't use distribution's QCustomPlot even if available" ON)
  OPTION(FORCE_INTERNAL_QHEXEDIT "Don't use distribution's QHexEdit even if available" ON)
  OPTION(ALL_WARNINGS "Enable some useful warning flags" OFF)
-@@ -497,6 +497,15 @@ if(NOT WIN32)
+@@ -499,6 +499,15 @@ if(NOT WIN32)
  	install(TARGETS ${PROJECT_NAME}
  		RUNTIME DESTINATION bin
  		LIBRARY DESTINATION lib)
@@ -77,5 +77,5 @@ index 6b1e6141..7e5a6639 100644
  target_link_libraries(qscintilla2 Qt5::Widgets Qt5::PrintSupport)
  
 -- 
-2.28.0
+2.32.0
 
